@@ -1,0 +1,34 @@
+
+---Admin Login Details---
+
+Email   : admin@mail.com
+Password: codeastro.com
+
+---Teacher Login Details---
+
+Email   : teacher@mail.com
+Password: codeastro.com
+
+Email   : adam@gmail
+Password: fauzi123
+
+
+---Student Login Details---
+
+Email   : student@mail.com
+Password: codeastro.com
+
+Email   : rashford@gmail
+Password: fauzi123
+
+
+
+---Parents Login Details---
+
+Email   : parent@mail.com
+Password: codeastro.com
+
+Email   : rashfordp@gmail
+Password: fauzi123
+
+
