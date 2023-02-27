@@ -150,9 +150,9 @@
                 <div class="md:flex md:items-center">
                     <div class="md:w-1/3"></div>
                     <div class="md:w-2/3">
-                        <button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                        <button id="submitBtn" class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
                             Submit
-                        </button>
+                          </button>
                     </div>
                 </div>
             </form>        
@@ -162,9 +162,31 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(function() {       
         $( "#datepicker-tc" ).datepicker({ dateFormat: 'yy-mm-dd' });
     })
+    
+    const submitBtn = document.getElementById('submitBtn');
+
+submitBtn.addEventListener('click', function() {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+
+  Toast.fire({
+    icon: 'success',
+    title: 'Signed in successfully'
+  });
+});
 </script>
 @endpush
