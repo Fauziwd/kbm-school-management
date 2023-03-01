@@ -481,6 +481,7 @@ class ComposerStaticInitfc4b98d6053e2c59ee21ec7e5e8f7823
         'App\\Http\\Controllers\\GradeController' => __DIR__ . '/../..' . '/app/Http/Controllers/GradeController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ParentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ParentsController.php',
+
         'App\\Http\\Controllers\\RoleAssign' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleAssign.php',
         'App\\Http\\Controllers\\RolePermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolePermissionController.php',
         'App\\Http\\Controllers\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentController.php',
