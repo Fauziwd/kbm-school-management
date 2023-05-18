@@ -4,7 +4,8 @@
     <div class="roles-permissions">
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h2 class="text-gray-700 uppercase font-bold">Parents</h2>
+                <h2 class="text-gray-700 uppercase font-bold">Data OTA</h2>
+                <h4 class="text-gray-500 italic text-sm">"Orang Tua Asuh"</h4>
             </div>
             <div class="flex flex-wrap items-center">
                 <a href="{{ route('parents.create') }}" class="bg-green-500 text-white text-sm uppercase py-2 px-4 flex items-center rounded">

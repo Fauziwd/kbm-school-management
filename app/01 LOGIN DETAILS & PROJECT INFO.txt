@@ -9,17 +9,11 @@ Password: codeastro.com
 Email   : teacher@mail.com
 Password: codeastro.com
 
-Email   : adam@gmail
-Password: fauzi123
-
 
 ---Student Login Details---
 
 Email   : student@mail.com
 Password: codeastro.com
-
-Email   : rashford@gmail
-Password: fauzi123
 
 
 
@@ -28,7 +22,5 @@ Password: fauzi123
 Email   : parent@mail.com
 Password: codeastro.com
 
-Email   : rashfordp@gmail
-Password: fauzi123
 
 

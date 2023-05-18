@@ -7,37 +7,32 @@ use App\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TeachersExport;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::with('user')->latest()->paginate(10);
+        $search = $request->input('search');
+
+        $teachers = Teacher::where(function ($query) use ($search) {
+            $query->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%")
+                    ->orWhere('email', 'LIKE', "%$search%")
+                    ->orWhere('phone', 'LIKE', "%$search%")
+                    ->orWhere('current_address', 'LIKE', "%$search%");
+            });
+        })->paginate(10);
 
         return view('backend.teachers.index', compact('teachers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('backend.teachers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -56,7 +51,7 @@ class TeacherController extends Controller
             'email'     => $request->email,
             'password'  => Hash::make($request->password)
         ]);
-        
+
         if ($request->hasFile('profile_picture')) {
             $profile = Str::slug($user->name).'-'.$user->id.'.'.$request->profile_picture->getClientOriginalExtension();
             $request->profile_picture->move(public_path('images/profile'), $profile);
@@ -80,23 +75,6 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Teacher $teacher)
     {
         $teacher = Teacher::with('user')->findOrFail($teacher->id);
@@ -104,13 +82,6 @@ class TeacherController extends Controller
         return view('backend.teachers.edit', compact('teacher'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Teacher $teacher)
     {
         $request->validate([
@@ -149,18 +120,12 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Teacher  $teacher
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Teacher $teacher)
     {
         $user = User::findOrFail($teacher->user_id);
 
         $user->teacher()->delete();
-        
+
         $user->removeRole('Teacher');
 
         if ($user->delete()) {
