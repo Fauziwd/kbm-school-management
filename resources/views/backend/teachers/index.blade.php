@@ -53,30 +53,30 @@
             </div>
             @foreach ($teachers as $teacher)
             <div style="font-family: 'Quicksand', sans-serif;" class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
-              <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->user->name }}</div>
-              <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->user->email }}</div>
-              <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->current_address }}</div>
-              <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->phone }}</div>
+              <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight cursor-pointer" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->user->name }}</div>
+              <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight cursor-pointer" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->user->email }}</div>
+              <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight cursor-pointer" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->current_address }}</div>
+              <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight cursor-pointer" onclick="toggleDetails('details{{ $teacher->id }}')">{{ $teacher->phone }}</div>
               <div class="w-2/12 flex items-center justify-end px-3">
                 <!-- Tombol aksi -->
-                <a href="{{ route('teacher.edit',$teacher->id) }}">
-                  <svg width="24px" viewBox="0 0 24 24" fill="#FBFFDC" xmlns="http://www.w3.org/2000/svg">  <rect width="100%" height="100%" rx="4" ry="4" fill="#B3C890" />
+                <a href="{{ route('teacher.edit', $teacher->id) }}" class="inline-block ml-1">
+                  <svg width="24px" viewBox="0 0 24 24" fill="#FBFFDC" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" rx="4" ry="4" fill="#B3C890" />
                     <path d="M13.9445 14.1875L9.94446 10.1875M13.9445 14.1875L8.946 19.1859C8.28735 19.8446 7.48784 20.3646 6.56993 20.5229C5.64311 20.6828 4.49294 20.736 3.94444 20.1875C3.39595 19.639 3.44915 18.4888 3.609 17.562C3.76731 16.6441 4.28735 15.8446 4.946 15.1859L9.94446 10.1875M13.9445 14.1875C13.9445 14.1875 16.9444 11.1875 14.9444 9.1875C12.9444 7.1875 9.94446 10.1875 9.94446 10.1875M3.5 12C3.5 5.5 5.5 3.5 12 3.5C18.5 3.5 20.5 5.5 20.5 12C20.5 18.5 18.5 20.5 12 20.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>                  
+                  </svg>                  
                 </a>
                 <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" onsubmit="confirmDelete()">
                   @csrf
                   @method('DELETE')
-              
                   <button type="submit" class="deletebtn ml-1 bg-red-600 block p-1 border border-red-600 rounded-sm">
-                      <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                          <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path>
-                      </svg>
+                    <svg class="h-3 w-3 fill-current text-gray-100" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                      <path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path>
+                    </svg>
                   </button>
-              </form>                           
+                </form>                           
               </div>
             </div>
-            <div id="details{{ $teacher->id }}" style="display: none;" class="details-container transition-all duration-300">
+            <div id="details{{ $teacher->id }}" style="display: none;" class="bg-white p-4 rounded shadow details-container transition-all duration-300">
               <!-- Elemen untuk menampilkan detail biodata -->
               <p>Detail Biodata</p>
               <img width="100px" src="{{ asset('images/profile/' . $teacher->user->profile_picture) }}" alt="" srcset="">
