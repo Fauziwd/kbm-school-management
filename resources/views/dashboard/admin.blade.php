@@ -131,6 +131,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
+        
         // Data for the charts
         var studentData = {
             labels: ['CAT.A', 'CAT.B', 'CAT.C'],

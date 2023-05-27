@@ -76,7 +76,7 @@
               </form>                           
               </div>
             </div>
-            <div id="details{{ $teacher->id }}" style="display: none;" class="details-container">
+            <div id="details{{ $teacher->id }}" style="display: none;" class="details-container transition-all duration-300">
               <!-- Elemen untuk menampilkan detail biodata -->
               <p>Detail Biodata</p>
               <img width="100px" src="{{ asset('images/profile/' . $teacher->user->profile_picture) }}" alt="" srcset="">
@@ -96,13 +96,13 @@
         @include('backend.modals.delete',['name' => 'teacher'])
     </div>
     <script>
-function toggleDetails(elementId) {
-  var detailsElement = document.getElementById(elementId);
-  if (detailsElement.style.display === "none") {
-    detailsElement.style.display = "block";
-  } else {
-    detailsElement.style.display = "none";
+  function toggleDetails(elementId) {
+    var detailsElement = document.getElementById(elementId);
+    if (detailsElement.style.display === "none") {
+      detailsElement.style.display = "block";
+    } else {
+      detailsElement.style.display = "none";
+    }
   }
-}
     </script>
 @endsection
