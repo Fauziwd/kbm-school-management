@@ -27,6 +27,7 @@ Route::post('/profile/changepassword', 'HomeController@changePassword')->name('p
 
 Route::group(['middleware' => ['auth','role:Admin']], function () 
 {
+    Route::get('/teachers/export', 'TeacherController@export')->name('teachers.export');  
     Route::get('/roles-permissions', 'RolePermissionController@roles')->name('roles-permissions');
     Route::get('/role-create', 'RolePermissionController@createRole')->name('role.create');
     Route::post('/role-store', 'RolePermissionController@storeRole')->name('role.store');
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['auth','role:Admin']], function ()
     Route::resource('parents', 'ParentsController');
     Route::resource('student', 'StudentController');
     Route::get('attendance', 'AttendanceController@index')->name('attendance.index');
-
+Route::get('/students/search', 'StudentController@search')->name('students.search');
 });
 
 Route::group(['middleware' => ['auth','role:Teacher']], function () 
@@ -65,3 +66,4 @@ Route::group(['middleware' => ['auth','role:Parent']], function ()
 Route::group(['middleware' => ['auth','role:Student']], function () {
 
 });
+

@@ -13,27 +13,29 @@
                 </a>
             </div>
         </div>
-        <form action="{{ route('student.index') }}" method="GET" class="mb-4">
+        <form action="{{ route('teacher.index') }}" method="GET" class="mb-4">
             <div class="flex items-center">
-                <label for="search" class="mr-2 text-gray-600">Search:</label>
-                <input type="text" name="search" id="search" class="border border-gray-300 px-2 py-1 rounded" value="{{ request('search') }}" placeholder="Cari berdasarkan nama, email, atau nomor">
-                <button type="submit" class="ml-2 bg-purple-500 text-white px-4 py-1 rounded">Search</button>
+              <div class="inputGroup">
+                <input type="text" name="search" id="search" class="border border-gray-300 px-2 py-1 rounded" value="{{ request('search') }}" required>
+                <label for="search" autocomplete="off">Search</label>
+              </div>
+              <button type="submit" class="ml-1 bg-purple-500 text-white px-4 py-1 rounded">Search</button>
             </div>
-        </form>
+          </form> 
         <!-- Log on to codeastro.com for more projects -->
         <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
             <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-600 text-white rounded-tl rounded-tr">
-                <div class="w-3/12 px-4 py-3">Name</div>
+                <div class="w-3/12 px-4 py-3">Nama</div>
                 <div class="w-3/12 px-4 py-3">Email</div>
-                <div class="w-2/12 px-4 py-3">Class</div>
-                <div class="w-2/12 px-4 py-3">Phone</div>
+                <div class="w-2/12 px-4 py-3">Alamat</div>
+                <div class="w-2/12 px-4 py-3">No.HP</div>
                 <div class="w-2/12 px-4 py-3 text-right">Action</div>
             </div>
             @foreach ($students as $student)
                 <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
                     <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->user->name }}</div>
                     <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->user->email }}</div>
-                    <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->class->class_name ?? '' }}</div>
+                    <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->current_address ?? '' }}</div>
                     <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->phone }}</div>
                     <div class="w-2/12 flex items-center justify-end px-3">
                         <a href="{{ route('student.show',$student->id) }}" class="ml-1 bg-blue-600 block p-1 border border-blue-600 rounded-sm" title="View Profile">

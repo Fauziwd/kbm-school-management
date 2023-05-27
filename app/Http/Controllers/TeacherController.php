@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TeachersExport;
+use App\Imports\TeachersImport;
 
 class TeacherController extends Controller
 {
@@ -25,9 +26,17 @@ class TeacherController extends Controller
             });
         })->paginate(10);
 
+        if ($request->has('export')) {
+            return Excel::download(new TeachersExport, 'teachers.xlsx');
+        }
+
         return view('backend.teachers.index', compact('teachers'));
     }
 
+    public function export()
+    {
+        return Excel::download(new TeachersExport, 'teachers.xlsx');
+    }
     public function create()
     {
         return view('backend.teachers.create');
@@ -120,6 +129,7 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index');
     }
 
+    
     public function destroy(Teacher $teacher)
     {
         $user = User::findOrFail($teacher->user_id);
@@ -139,4 +149,17 @@ class TeacherController extends Controller
 
         return back();
     }
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
+        $file = $request->file('file');
+
+        Excel::import(new TeachersImport, $file);
+
+        return redirect()->route('teacher.index')->with('success', 'Data imported successfully.');
+    }
+
 }

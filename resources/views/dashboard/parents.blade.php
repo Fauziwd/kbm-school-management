@@ -3,7 +3,7 @@
         <div class="w-full sm:max-w-sm bg-gray-200 text-center border border-gray-300 rounded px-8 py-6 my-4 sm:my-0">
             <h3 class="text-gray-700 uppercase font-bold">
                 <span class="text-4xl">{{ sprintf("%02d", $parents->children_count) }}</span>
-                <span class="leading-tight">Children</span>
+                <span class="leading-tight">Pesantren</span>
             </h3>
         </div>
     </div>
@@ -21,7 +21,7 @@
 
                     <div class="flex items-center justify-between">
                         <div class="w-1/2 text-sm text-right">Class :</div>
-                        <div class="w-1/2 text-sm text-left ml-2">{{ $children->class->class_name }}</div>
+                        <div class="w-1/2 text-sm text-left ml-2">{{ $children->class }}</div>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="w-1/2 text-sm text-right">Role :</div>

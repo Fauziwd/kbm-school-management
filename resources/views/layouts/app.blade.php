@@ -9,7 +9,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
 </head>
 <!-- Log on to codeastro.com for more projects -->
 <body class="bg-gray-100 font-sans antialiased">
@@ -32,7 +33,24 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script>
+        function confirmDelete() {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Kamu akan menghapus data ini secara permanen?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+        }
+    </script>
     <script>
         $(function() {
             $( "#opennavdropdown" ).on( "click", function() {

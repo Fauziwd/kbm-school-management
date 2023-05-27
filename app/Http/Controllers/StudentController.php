@@ -13,6 +13,22 @@ use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
+    public function search(Request $request)
+{
+    $search = $request->input('search');
+
+    $students = Student::where(function ($query) use ($search) {
+        $query->whereHas('user', function ($query) use ($search) {
+            $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%")
+                ->orWhere('phone', 'LIKE', "%$search%")
+                ->orWhere('current_address', 'LIKE', "%$search%");
+        });
+    })->paginate(10);
+
+    return view('backend.students.index', compact('students'));
+}
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +52,7 @@ class StudentController extends Controller
         $classes = Grade::latest()->get();
         $parents = Parents::with('user')->latest()->get();
         
-        return view('backend.students.create', compact('classes','parents'));
+        return view('backend.students.create', compact('classes','parents','student'));
     }
 
     /**

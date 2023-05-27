@@ -1,25 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="roles-permissions">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h2 class="text-gray-700 uppercase font-bold">Data OTA</h2>
-                <h4 class="text-gray-500 italic text-sm">"Orang Tua Asuh"</h4>
-            </div>
-            <div class="flex flex-wrap items-center">
-                <a href="{{ route('parents.create') }}" class="bg-green-500 text-white text-sm uppercase py-2 px-4 flex items-center rounded">
-                    <svg class="w-3 h-3 fill-current" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
-                    <span class="ml-2 text-xs font-semibold">Add New Parents</span>
-                </a>
-            </div>
+<div class="roles-permissions">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-gray-700 uppercase font-bold text-4xl tracking-wide border-b-4 border-gray-600 pb-2">Data OTA</h2>
+        </div>        
+        <div class="flex flex-wrap items-center">
+            <a href="{{ route('parents.create') }}" class="bg-green-500 hover:bg-green-600 text-white text-sm uppercase py-2 px-4 rounded-lg shadow">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 fill-current text-white mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 0 1 0 2h-6v6a1 1 0 0 1-2 0v-6H5a1 1 0 0 1 0-2h6V5a1 1 0 0 1 1-1z"/></svg>
+                    <span class="font-semibold">Tambah OTA</span>
+                </div>
+            </a>
         </div>
+         
+    </div>
+    <form action="{{ route('teacher.index') }}" method="GET" class="mb-4">
+        <div class="flex items-center">
+          <div class="inputGroup">
+            <input type="text" name="search" id="search" class="border border-gray-300 px-2 py-1 rounded" value="{{ request('search') }}" required>
+            <label for="search" autocomplete="off">Search</label>
+          </div>
+          <button type="submit" class="ml-1 bg-purple-500 text-white px-4 py-1 rounded">Search</button>
+        </div>
+      </form> 
+    </div>    
+
         <!-- Log on to codeastro.com for more projects -->
         <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
             <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-600 text-white rounded-tl rounded-tr">
                 <div class="w-3/12 px-4 py-3">Name</div>
                 <div class="w-3/12 px-4 py-3">Email</div>
-                <div class="w-2/12 px-4 py-3">Children</div>
+                {{-- <div class="w-2/12 px-4 py-3">Pesantren</div> --}}
                 <div class="w-2/12 px-4 py-3">Phone</div>
                 <div class="w-2/12 px-4 py-3 text-right">Actions</div>
             </div>
@@ -27,13 +40,13 @@
                 <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
                     <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $parent->user->name }}</div>
                     <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $parent->user->email }}</div>
-                    <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">
+                    {{-- <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">
                         @foreach ($parent->children as $children)
                             <span class="bg-gray-200 text-xs font-normal px-2 py-px border rounded-full inline-flex my-px">
                                 {{ $children->user->name }}
                             </span>
                         @endforeach
-                    </div>
+                    </div> --}}
                     <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $parent->phone }}</div>
                     <div class="w-2/12 flex items-center justify-end px-3">
                         <a href="{{ route('parents.edit',$parent->id) }}">
